@@ -1,11 +1,11 @@
 import Collider from "@components/Collider";
 import Dynamic from "@components/Dynamic";
 import Transform from "@components/Transform";
-import System, { SystemArchetype } from "@ecs/System";
+import ISystem, { SystemArchetype } from "@ecs/System";
 import World from "@ecs/World";
 import { Vector2 } from "src/core/Vector";
 
-export default class BounceSystem implements System {
+export default class BounceSystem implements ISystem<[Transform, Dynamic, Collider]> {
     private static archetype : SystemArchetype = [
         Transform.ComponentType,
         Dynamic.ComponentType,

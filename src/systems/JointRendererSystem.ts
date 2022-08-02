@@ -1,11 +1,11 @@
 import Joint from "@components/Joint";
 import Renderable from "@components/Renderable";
 import Transform from "@components/Transform";
-import System, { SystemArchetype } from "@ecs/System";
+import ISystem, { SystemArchetype } from "@ecs/System";
 import World from "@ecs/World";
 import { Vector2 } from "src/core/Vector";
 
-export default class JointRendererSystem implements System {
+export default class JointRendererSystem implements ISystem {
     private static archetype : SystemArchetype = [
         Transform.ComponentType,
         Joint.ComponentType

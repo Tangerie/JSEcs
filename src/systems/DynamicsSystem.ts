@@ -1,10 +1,10 @@
 import Dynamic from "@components/Dynamic";
 import Transform from "@components/Transform";
-import System, { SystemArchetype } from "@ecs/System";
+import ISystem, { SystemArchetype } from "@ecs/System";
 import World from "@ecs/World";
 import { Vector2 } from "src/core/Vector";
 
-export default class DynamicsSystem implements System {
+export default class DynamicsSystem implements ISystem {
     private static archetype : SystemArchetype = [
         Transform.ComponentType,
         Dynamic.ComponentType

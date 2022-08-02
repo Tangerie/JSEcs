@@ -1,11 +1,11 @@
 import Renderable from "@components/Renderable";
 import Transform from "@components/Transform";
-import System, { SystemArchetype } from "@ecs/System";
+import ISystem, { SystemArchetype } from "@ecs/System";
 import World from "@ecs/World";
 import { Color } from "src/core/Color";
 import { Vector2 } from "src/core/Vector";
 
-export default class RendererSystem implements System {
+export default class RendererSystem implements ISystem {
     private static archetype : SystemArchetype = [
         Transform.ComponentType,
         Renderable.ComponentType
