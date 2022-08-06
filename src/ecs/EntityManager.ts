@@ -1,4 +1,5 @@
 import { Entity } from "./Entity";
+import { EntityFactory } from "./EntityFactory";
 
 export default class EntityManager {
     private entities : Entity[] = [];

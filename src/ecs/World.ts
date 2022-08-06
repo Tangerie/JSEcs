@@ -1,22 +1,24 @@
 import ComponentManager from "./ComponentManager";
+import { Entity } from "./Entity";
+import { EntityFactory } from "./EntityFactory";
 import EntityManager from "./EntityManager";
 import SystemManager from "./SystemManager";
 
-export default class World {
+export interface IWorld {
+    tick : number;
+    delta : number;
+    Update(delta : number) : void;
+    instantiate(number : number, ...factories : EntityFactory<World>[]) : number[];
+}
+
+export default class World implements IWorld {
     protected static _current : World | undefined;
 
-    static current() {
+    static get current() {
         if(!this._current) throw new Error("No world created");
         return this._current;
     }
 
-    static create(ctxt : CanvasRenderingContext2D) {
-        const w = new World(ctxt);
-        this._current = w;
-        return w;
-    }
-
-    private ctxt : CanvasRenderingContext2D;
     private _tick : number = 0;
     private _delta : number = 1;
 
@@ -24,8 +26,7 @@ export default class World {
     public readonly entities : EntityManager;
     public readonly systems : SystemManager;
 
-    private constructor(ctxt : CanvasRenderingContext2D) {
-        this.ctxt = ctxt;
+    protected constructor() {
         this.components = new ComponentManager();
         this.entities = new EntityManager();
         this.systems = new SystemManager(this);
@@ -35,7 +36,6 @@ export default class World {
 
     get delta() { return this._delta }
 
-
     Update(delta : number) {
         this._delta = delta;
 
@@ -44,4 +44,17 @@ export default class World {
         this._tick++;
     }
 
+
+    instantiate(number : number = 1, ...factories : EntityFactory<World>[]) {
+        const ids = new Array<Entity>(number);
+
+        for(let i = 0; i < number; i++) {
+            const entity = ids[i] = this.entities.createEntity();
+            for(const factory of factories) {
+                factory(entity, this);
+            }
+        }
+
+        return ids;
+    }
 }

@@ -30,6 +30,9 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: black;
+	width: 100vw;
+	height: 100vh;
 }
 ol, ul {
 	list-style: none;
@@ -48,8 +51,14 @@ table {
 }
 
 canvas {
-	box-sizing: border-box;
-	width: 100vw;
-	height: 100vh;
-	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 100%;
+	bottom: 100%;
+}
+
+@import url("./assets/fonts/RandyGG.css");
+html {
+	font-family: "RandyGG";
 }

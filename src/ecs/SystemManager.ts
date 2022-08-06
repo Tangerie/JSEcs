@@ -32,6 +32,7 @@ export default class SystemManager {
             }
         }
 
+        if(sys.postrun) sys.postrun(this.world);
     }
 
     run() {

@@ -1,20 +1,5 @@
-import Component, { ComponentType, IComponent } from "./Component";
-import World from "./World";
+import { IComponent } from "./Component";
+import { Entity } from "./Entity";
+import World, { IWorld } from "./World";
 
-type ComponentInitializer = () => IComponent;
-
-export default class EntityFactory {
-    private readonly _inits : ComponentInitializer[];
-
-    constructor(...components : ComponentInitializer[]) {
-        this._inits = components;
-    }
-
-    instantiate(world : World) {
-        const entity = world.entities.createEntity();
-        for(const c of this._inits) {
-            world.components.addComponent(entity, c());
-        }
-        return entity;
-    }
-}
+export type EntityFactory<T extends World> = (entity : Entity, world : T) => void;
